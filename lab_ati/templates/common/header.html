@@ -28,6 +28,9 @@
             <ul class="d-flex justify-content-between align-items-center mb-0 custom-header__menu flex-grow-1">
                 {% if business_id %}
                     <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
+                        <a href="{%url "areasdenegocio" business_id=business_id%}" class="link-normal text-black">{% trans "Áreas de Negocio" %}</a>
+                    </li>
+                    <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
                         <a href="{% url 'empresa:business-list' %}" class="link-normal text-black">{% trans "Empresas" %}</a>
                     </li>
                     <li class="px-2 py-1 rounded-bottom custom-header__menu-item">

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="general-container">
+        <div class="container d-grid gap-3 pb-4">
+            <h2 class="text-center pb-4">{% trans "Lista de Áreas de Negocio" %}</h2>
+            <div class="d-flex justify-content-between mb-2">
+                <h2>{% trans "Gestiona Áreas de Negocio" %}</h2>
+                <a  href="{% url 'create-areasdenegocio' business_id=business_id %}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </a>
+            </div>
+            <div class="row">
+                <table class="table table-success table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Empresa' %}</th>
+                            <th>{% trans 'Área de Negocio' %}</th>
+                            <th>{% trans 'País(es)' %}</th>
+                            <th>{% trans 'Descripción' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for area in areasdenegocio %}
+                        <tr>
+                            <td>{{ area.nombre_empresa }}</td>
+                            <td>{{ area.nombre }}</td>
+                            <td>{{ area.pais }}</td>
+                            <td>{{ area.descripcion }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
