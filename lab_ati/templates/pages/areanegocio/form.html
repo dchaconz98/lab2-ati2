@@ -12,11 +12,12 @@
                         <select 
                             class="form-select" 
                             aria-label="Default select example"
-                            name="{{ form.pais.name }}"
-                            placeholder="{{ form.pais.label_tag }}"
+                            name="{{ field.name }}"
+                            placeholder="{{ field.label }}"
+                            multiple
                         >
-                        {% for country in countries %}
-                            <option value="{{ country.code }}" {% if country.code == field.value %}selected{% endif %}>{{ country.name }}</option>
+                        {% for value, label in field.field.choices %}
+                            <option value="{{ value }}" {% if value in field.value %}selected{% endif %}>{{ label }}</option>
                         {% endfor %}
                         </select>
                     {% elif field.name != 'id_empresa' %}

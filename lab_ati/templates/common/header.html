@@ -33,7 +33,7 @@
                     <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
                         <a href="{% url 'empresa:business-list' %}" class="link-normal text-black">{% trans "Empresas" %}</a>
                     </li>
-                    <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
+                    <!--li class="px-2 py-1 rounded-bottom custom-header__menu-item">
                         <a href="{%url "clients" business_id=business_id%}" class="link-normal text-black">{% trans "Clientes" %}</a>
                     </li>
                     <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
@@ -41,7 +41,7 @@
                     </li>
                     <li class="px-2 py-1 rounded-bottom custom-header__menu-item">
                     <a class="link-normal text-black" href="{% url 'empresa:list-employee' business_id=business_id %}">{% trans "Empleados" %}</a>
-                    </li>
+                    </li-->
                 {% endif %}
                 <li class="px-2 py-1">
                     <form class="d-flex gap-3" action="{% url 'set_language' %}" method="post">{% csrf_token %}
