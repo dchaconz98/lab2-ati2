@@ -17,6 +17,11 @@ def areasdenegocio(request, business_id):
     elif order == 'pais':
         areasdenegocio = areasdenegocio.order_by('pais')
 
+    filtrar_por_empresa = request.GET.get('filtrar_por_empresa')
+
+    if filtrar_por_empresa == 'si':
+        areasdenegocio = areasdenegocio.filter(id_empresa=business_id)
+
     context['areasdenegocio'] = areasdenegocio
 
     return render(request, 'pages/areanegocio/index.html', context)
