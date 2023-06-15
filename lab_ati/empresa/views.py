@@ -24,6 +24,17 @@ class BusinessListView(ListView):
 
     def get_queryset(self):
         queryset = Empresa.objects.all()
+
+        order = self.request.GET.get('order')
+
+        # Aplicar el ordenamiento según el parámetro recibido
+        if order == 'nombre':
+            queryset = queryset.order_by('nombre')
+        elif order == 'pais':
+            queryset = queryset.order_by('pais')
+        elif order == 'id_tributaria':
+            queryset = queryset.order_by('id_tributaria')
+
         return queryset
 
 class DeleteBusinessView(DeleteView):

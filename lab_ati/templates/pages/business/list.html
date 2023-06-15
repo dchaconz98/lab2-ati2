@@ -19,15 +19,9 @@
                 <table class="table table-success table-striped">
                     <thead>
                         <tr>
-                            <th>
-                                {% trans "Nombre" %}
-                            </th>
-                            <th>
-                                {% trans "País" %}
-                            </th>
-                            <th>
-                                {% trans "RIF" %}
-                            </th>
+                            <th><a href="?order=nombre">{% trans 'Nombre' %}</a></th>
+                            <th><a href="?order=pais">{% trans 'País' %}</a></th>
+                            <th><a href="?order=id_tributaria">{% trans 'RIF' %}</a></th>
                             <th>
                                 {% trans "Acciones" %}
                             </th>

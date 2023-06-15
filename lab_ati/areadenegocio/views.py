@@ -1,13 +1,22 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from lab_ati.areadenegocio.forms import AreaDeNegocioForm
-
 from lab_ati.areadenegocio.models import AreaDeNegocio
 
 def areasdenegocio(request, business_id):
     context = {}
     context['business_id'] = business_id
     areasdenegocio = AreaDeNegocio.objects.all()  # Consulta todas las áreas de negocio
+    order = request.GET.get('order')
+
+    # Aplicar el ordenamiento según el parámetro recibido
+    if order == 'empresa':
+        areasdenegocio = areasdenegocio.order_by('id_empresa')
+    elif order == 'area_negocio':
+        areasdenegocio = areasdenegocio.order_by('nombre')
+    elif order == 'pais':
+        areasdenegocio = areasdenegocio.order_by('pais')
+
     context['areasdenegocio'] = areasdenegocio
 
     return render(request, 'pages/areanegocio/index.html', context)
@@ -35,8 +44,6 @@ def crear_areadenegocio(request, business_id):
 
         if form.is_valid():
             area_de_negocio = form.save()  # Guardar el área de negocio en la base de datos
-            # Hacer cualquier otra lógica adicional si es necesario
-            print('GUARDEEEE BIIIIHH')
 
             return redirect('areasdenegocio', business_id = business_id)
     else:
