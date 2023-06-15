@@ -24,8 +24,20 @@
             {% if object.cliente_empresa %}
                 <p class="card-text"> {% trans 'Cliente de empresa' %}: {{ object.cliente_empresa }}</p>
             {% endif %}
+
+            {% if areasdenegocio %}
+                <h6>{% trans 'Áreas de Negocio' %}</h4>
+                <ul>
+                    {% for area in areasdenegocio %}
+                        <li>{{ area.nombre }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="color: red;">{% trans 'La empresa aún no tiene áreas de negocio registradas. Por favor haga click en el botón de Áreas de Negocio de abajo o en la pestaña del menú.' %}</p>
+            {% endif %}
+            
             <section class="d-flex justify-content-center">
-                <a href="{% url 'empresa:edit-business' pk=object.id %}">
+                <!--a href="{% url 'empresa:edit-business' pk=object.id %}">
                     <button class="btn btn-primary">
                         {% trans 'Editar' %}
                     </button>
@@ -48,6 +60,12 @@
                 <a href="{% url 'empresa:list-employee' business_id=object.id %}" class="mx-2">
                     <button class="btn btn-warning">
                         {% trans 'Empleados' %}
+                    </button>
+                </a-->
+
+                <a href="{%url "areasdenegocio" business_id=business_id%}" class="mx-2">
+                    <button class="btn btn-warning">
+                        {% trans 'Áreas de Negocio' %}
                     </button>
                 </a>
                 

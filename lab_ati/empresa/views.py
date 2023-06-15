@@ -2,6 +2,8 @@ from django.http.response import Http404
 from django.urls.base import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic import UpdateView, CreateView, ListView, DeleteView, DetailView, TemplateView
+
+from lab_ati.areadenegocio.models import AreaDeNegocio
 from .forms import CreateBusinessForm, CreateEmployeeForm, SocialMediaFormset
 from lab_ati.empresa.models import Empleado, Empresa, SocialMedia
 from django.urls import reverse
@@ -141,6 +143,8 @@ class BusinessDetailsView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["business_id"] = self.object.id
+        context["areasdenegocio"] = AreaDeNegocio.objects.filter(id_empresa=self.object.id)
+
         return context
 
 

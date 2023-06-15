@@ -1,0 +1,58 @@
+{% load i18n %}
+{% load countries %}
+{% get_countries as countries %}
+<form enctype="multipart/form-data" method="post"  class="container d-grid gap-3 pb-4">
+    {% csrf_token %}
+    <div class="row">
+        {% for field in form %}
+            <div class="col-6" style="margin-bottom: 15px;">
+                <div class="input-group">
+                    {% if field.name == 'pais' %}
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        <select 
+                            class="form-select" 
+                            aria-label="Default select example"
+                            name="{{ field.name }}"
+                            placeholder="{{ field.label }}"
+                            multiple
+                        >
+                        {% for value, label in field.field.choices %}
+                            <option value="{{ value }}" {% if value in field.value %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                        </select>
+                    {% elif field.name != 'id_empresa' %}
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        <input 
+                            type="{{ field.widget.input_type }}"
+                            class="form-control" 
+                            name="{{ field.name }}"
+                            aria-describedby="helpId" 
+                            placeholder="{{ field.label }}"
+                            value="{{ field.value | default:'' }}"
+                        >
+                        {% for error in field.errors %}
+                            <p class="text-danger text-xs">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                {{ error }}
+                            </p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <section class="row">
+            <section class="col input-group">
+                <label for="{{ form.id_empresa.id_for_label }}" class="input-group-text">{{ form.id_empresa.label_tag }}</label>
+                {{ form.id_empresa }}
+                {% for error in form.id_empresa.errors %}
+                    <span class="invalid-feedback">{{ error }}</span>
+                {% endfor %}
+            </section>
+        </section>
+    </div>
+    <div class="row">
+        <div class="col input-group">
+            <input class="btn btn-primary" type="submit" value="{% trans "Enviar" %}">
+        </div>
+    </div>
+</form>
