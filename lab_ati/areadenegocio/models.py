@@ -6,16 +6,19 @@ class AreaDeNegocio(models.Model):
         Empresa,
         on_delete=models.CASCADE,
         verbose_name="Empresa relacionada",
-        related_name="areas_de_negocio"
+        related_name="empresa_del_area_de_negocio",
+        null=True, blank=True
     )
     nombre_empresa = models.CharField("Nombre de la empresa", max_length=255)
     nombre = models.CharField("Nombre del área de negocio", max_length=255)
-    paises = models.ManyToManyField(
+    pais = models.TextField("País", null=True, blank=True)
+    descripcion = models.TextField("Descripción del área de negocio", null=True, blank=True)
+
+    """paises = models.ManyToManyField(
         "Pais",
         verbose_name="Países",
         related_name="areas_de_negocio"
-    )
-    descripcion = models.TextField("Descripción del área de negocio")
+    )"""
 
     def __str__(self):
         return self.nombre
@@ -24,11 +27,11 @@ class AreaDeNegocio(models.Model):
         verbose_name_plural = "Áreas de Negocio"
 
 
-class Pais(models.Model):
+"""class Pais(models.Model):
     nombre = models.CharField("Nombre del país", max_length=255)
 
     def __str__(self):
         return self.nombre
 
     class Meta:
-        verbose_name_plural = "Países"
+        verbose_name_plural = "Países" """
